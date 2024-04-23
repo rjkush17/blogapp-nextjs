@@ -1,3 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    @apply m-0 p-0 box-border
+}
+
+body {
+    @apply w-full overflow-x-hidden
+}
+
+/* Navbar CSS */
+.full_ul {
+    @apply bg-white justify-between gap-10 text-lg tracking-wider font-semibold uppercase transition-all duration-1000 
+}
+@media (max-width: 900px) {
+    .full_ul {
+        @apply absolute justify-start top-0 w-screen h-screen flex-col py-8 px-12 
+    }}
