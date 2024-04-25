@@ -31,7 +31,7 @@ function Header() {
           className={`full_ul ${ 
             isPanelOpen
               ? " right-0 flex"
-              : "right-[-100%]  hidden"
+              : "right-[-100%] hidden"
           }`}
         >
           <li

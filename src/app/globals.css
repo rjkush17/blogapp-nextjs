@@ -14,7 +14,7 @@ body {
 
 /* Navbar CSS */
 .full_ul {
-    @apply bg-white justify-between gap-10 text-lg tracking-wider font-semibold uppercase transition-all duration-1000 
+    @apply tablet:flex bg-white justify-between gap-10 text-lg tracking-wider font-semibold uppercase transition-all duration-1000 
 }
 @media (max-width: 900px) {
     .full_ul {
