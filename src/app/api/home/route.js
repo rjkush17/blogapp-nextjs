@@ -2,6 +2,7 @@ import connectDB from "@/lib/database";
 import blogModel from "@/models/blogModel";
 import { NextResponse } from "next/server";
 
+
 //Post API for creating new blog
 export async function POST(req) {
   try {
@@ -28,7 +29,7 @@ export async function GET(req) {
 
     const rendom_data = await blogModel.aggregate([
       { $sample: { size: 5 } },
-      { $project: { _id: 1, title: 1, featured_img: 1, img:1, description: 1 } },
+      { $project: { _id: 1, title: 1, featured_img: 1, img:1, description: 1, category : 1 } },
     ]);
     if (!rendom_data) {
       return NextResponse.json(
@@ -39,7 +40,7 @@ export async function GET(req) {
 
     const featured_data = await blogModel.find(
       { featured: true },
-      { _id: 1, title: 1, featured_img: 1,img:1, description: 1 }
+      { _id: 1, title: 1, featured_img: 1,img:1, description: 1, category : 1 }
     );
     if (!featured_data) {
       return NextResponse.json(
@@ -51,7 +52,7 @@ export async function GET(req) {
     const health_data = await blogModel.aggregate([
       { $match: { category: "health" } },
       { $sample: { size: 4 } },
-      { $project: { _id: 1, title: 1, featured_img: 1,img:1, description: 1 } },
+      { $project: { _id: 1, title: 1, featured_img: 1,img:1, description: 1, category : 1, date : 1 } },
     ]);
     if (!health_data) {
       return NextResponse.json(
@@ -63,7 +64,7 @@ export async function GET(req) {
     const travel_data = await blogModel.aggregate([
       { $match: { category: "travel" } },
       { $sample: { size: 4 } },
-      { $project: { _id: 1, title: 1, featured_img: 1,img:1, description: 1 } },
+      { $project: { _id: 1, title: 1, featured_img: 1,img:1, description: 1, category : 1, date : 1  } },
     ]);
     if (!travel_data) {
       return NextResponse.json(

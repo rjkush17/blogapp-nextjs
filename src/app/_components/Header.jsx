@@ -1,24 +1,38 @@
 "use client";
 import Image from "next/image";
 import { FaBarsStaggered } from "react-icons/fa6";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import logo from "/public/header/mainlogo.png";
 
 function Header() {
   // navbar panel function
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+
+  useEffect(()=>{
+    if(isPanelOpen && window.width <= 900){
+      document.body.classList.add("overflow-y-hidden")
+    }
+
+    return ()=>{
+      document.body.classList.remove("overflow-y-hidden")
+    }
+  },[isPanelOpen])
+
+
   return (
-    <header className=" w-screen overflow-hidden py-6 tablet:py-10 px-4 tablet:px-20 font-robo">
+    <header className=" w-screen overflow-hidden py-6 tablet:py-10 px-4 tablet:px-20 font-robo ">
       {/* navbar section */}
       <nav className="flex justify-between overflow-x-hidden">
-        <div className="relative w-auto">
+        <div className="relative w-auto h-auto">
           <Image
-            src="/header/mainlogo.png"
+            src={logo}
             alt="Website Logo"
             width={180}
-            height={50}
-            objectFit="cover"
-            priority
+            height={180}
+            priority={true}
+            className="w-44 h-auto"
           />
+        
         </div>
         <div
           className=" tablet:hidden text-2xl "
@@ -28,7 +42,7 @@ function Header() {
         </div>
 
         <ul
-          className={`full_ul ${ 
+          className={`full_ul z-[999999] ${ 
             isPanelOpen
               ? " right-0 flex"
               : "right-[-100%] hidden"

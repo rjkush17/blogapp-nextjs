@@ -12,15 +12,17 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      fontFamily:{
-        "robo" : ["Roboto", "sans-serif"]
+      fontFamily: {
+        robo: ["Roboto", "sans-serif"],
+        EB: ["EB Garamond", "serif"],
+        noto: ["Noto Sans", "sans-serif"],
       },
-      screens:{
-        'desktop' : '1200px',
-        'laptop':'1100px',
-        'tablet':'900px',
-        'mobile':'450px'
-      }
+      screens: {
+        desktop: "1200px",
+        laptop: "1100px",
+        tablet: "900px",
+        mobile: "450px",
+      },
     },
   },
   plugins: [],
