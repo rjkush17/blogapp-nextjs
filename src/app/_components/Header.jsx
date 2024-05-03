@@ -9,7 +9,7 @@ function Header() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 
   useEffect(()=>{
-    if(isPanelOpen && window.width <= 900){
+    if(isPanelOpen && window.innerWidth <= 900){
       document.body.classList.add("overflow-y-hidden")
     }
 

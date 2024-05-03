@@ -34,12 +34,12 @@ function useGET() {
     } catch (error) {
       if (error.name !== "AbortError") {
         console.error("Fetching failed", error);
-        setIsError("Failed to fetch API: " + error.message);
+        setIsError({error:"Failed to fetch API abort"});
         setIsLoading(null);
         return false;
       } else {
         console.log("fecthing failed");
-        setIsError("Failed to fetch API");
+        setIsError({error:"Failed to fetch API"});
         setIsLoading(null);
         return false;
       }

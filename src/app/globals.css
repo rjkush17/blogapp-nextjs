@@ -44,7 +44,7 @@ h3 {
     @apply text-xl
 }
 
-button {
+.button {
     @apply mt-8 rounded bg-black text-white font-noto py-4 px-10 text-xl w-fit font-semibold uppercase
 }
 
