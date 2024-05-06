@@ -19,7 +19,7 @@ function useGET() {
     setIsError(null);
     try {
       //set current set controller signle to this fetch request
-      const res = await fetch(`api/${route}`, { signal: newController.signal });
+      const res = await fetch(`/api/${route}`, { signal: newController.signal });
       const resData = await res.json();
 
       if (!res.ok) {
@@ -32,7 +32,7 @@ function useGET() {
       setData(resData);
       return true;
     } catch (error) {
-      if (error.name !== "AbortError") {
+      if (error.name == "AbortError") {
         console.error("Fetching failed", error);
         setIsError({error:"Failed to fetch API abort"});
         setIsLoading(null);

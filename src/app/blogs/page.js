@@ -1,6 +1,6 @@
 "use client";
 import useGET from "@/hooks/useGET";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Pagination from "../_components/Pagination";
 
 function page() {
@@ -8,7 +8,6 @@ function page() {
   useEffect(() => {
     fetchGET("blogs");
   }, []);
-
 
 
   return (
