@@ -19,6 +19,11 @@ function page() {
     console.log(filterdata);
   }
 
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+    alert("review Submitted")
+  }
+
   return (
     <main className="w-11/12 mobile:w-10/12 mx-auto">
       {isError && <p>{isError.error}</p>}
@@ -93,7 +98,10 @@ function page() {
           <h5 className="text-3xl font-EB mt-16">Comments</h5>
 
           {data.blogs[0].reviews.map((val, ind) => (
-            <div key={ind} className="flex  overflow-hidden my-4 items-center gap-8 mb-8">
+            <div
+              key={ind}
+              className="flex overflow-hidden my-4 items-center gap-8 mb-8"
+            >
               <div className="min-w-16 min-h-16 max-w-16 max-h-16 aspect-square overflow-hidden rounded-full">
                 <Image
                   src={val.img}
@@ -106,13 +114,51 @@ function page() {
               </div>
               <div>
                 <h6>
-                  {" "} 
-                  {val.profile} {"  "} <span className="text-gray-400 ml-4">{val.date.day} {val.date.month} {val.date.year}</span>
+                  {" "}
+                  {val.profile} {"  "}{" "}
+                  <span className="text-gray-400 ml-4">
+                    {val.date.day} {val.date.month} {val.date.year}
+                  </span>
                 </h6>
                 <p>{val.review}</p>
               </div>
             </div>
           ))}
+          <div className="w-full">
+            <h5 className="text-3xl font-EB mt-16">leave a Comments</h5>
+            <form onSubmit={handleSubmit}>
+              <div className="w-full flex flex-col mobile:flex-row gap-6 mb-6">
+                <input
+                  type="text"
+                  placeholder="Enter Your Name"
+                  required
+                  className="w-full shadow-lg rounded	p-2"
+                />
+                <input
+                  type="text"
+                  placeholder="Enter Your Email"
+                  required
+                  className="w-full shadow-lg	rounded py-1 px-4"
+                />
+              </div>
+              <textarea
+                className="w-full h-24 shadow-lg	rounded py-1 px-4 mt-6"
+                placeholder="Write your Commet Here"
+              />
+              <div className="my-3 flex items-center gap-2">
+                <input type="checkbox" />
+                <label>
+                  {" "}
+                  Save my name, email, and website in this browser for the next
+                  time I comment.
+                </label>
+              </div>
+              <button type="submit" className="w-full py-2 px-6 my-4 rounded bg-slate-900 text-white">
+                {" "}
+                Submit
+              </button>
+            </form>
+          </div>
         </section>
       )}
     </main>

@@ -33,7 +33,7 @@ p {
 }
 
 h1 {
-    @apply text-3xl mobile:text-4xl laptop:text-5xl font-medium font-robo uppercase
+    @apply text-2xl mobile:text-3xl laptop:text-4xl font-medium font-robo uppercase
 }
 
 h2 {
@@ -48,7 +48,7 @@ h4{
 }
 
 .button {
-    @apply mt-8 rounded bg-black text-white font-noto py-4 px-10 text-xl w-fit font-semibold uppercase
+    @apply mt-8 rounded  font-noto py-4 px-10 text-xl w-fit font-semibold uppercase
 }
 
 /* Navbar CSS */

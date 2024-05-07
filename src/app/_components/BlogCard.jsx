@@ -1,8 +1,13 @@
 import Image from "next/image";
+import { useRouter } from 'next/navigation'
+
 
 function BlogCard({ data }) {
+
+  const router = useRouter()
+
   return (
-    <section className="max-w-[500px] mx-auto ">
+    <section className="max-w-[500px] mx-auto">
       <div className="aspect-[6/4] overflow-hidden group relative cursor-pointer">
         <Image
           src={data.img}
@@ -23,7 +28,7 @@ function BlogCard({ data }) {
           {data.date.year}
         </p>
         <h3>{data.title}</h3>
-        <button
+        <button  onClick={() => router.push(`/blogs/${data._id}`)}
           className="my-4 rounded-full text-black bg-white hover:text-white hover:bg-black font-noto py-3 px-6 text-lg font-normal border-black border w-fit uppercase transition-all">
           Read more
         </button>

@@ -1,11 +1,15 @@
 import React from 'react'
 import Image from "next/image";
+import { useRouter } from 'next/navigation'
+
 
 function fiveBlog({blog}) {
+  const router = useRouter()
+
   return (
     <section className="flex flex-wrap laptop:flex-nowrap justify-center">
     {blog.map((val, ind)=>(
-      <div key={ind} className="flex w-full mobile:max-w-72 laptop:w-auto flex-col overflow-hidden">
+      <div key={ind} className="flex w-full mobile:max-w-72 laptop:w-auto flex-col overflow-hidden" onClick={() => router.push(`/blogs/${val._id}`)}>
         <Image  src={val.img}
         alt="Blog Image"
         width={800}

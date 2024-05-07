@@ -3,10 +3,14 @@ import Image from "next/image";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { useState,useEffect } from "react";
 import logo from "/public/header/mainlogo.png";
+import { useRouter } from 'next/navigation'
+
 
 function Header() {
   // navbar panel function
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const router = useRouter()
+
 
   useEffect(()=>{
     if(isPanelOpen && window.innerWidth <= 900){
@@ -23,7 +27,7 @@ function Header() {
     <header className=" w-screen overflow-hidden py-6 tablet:py-10 px-4 tablet:px-20 font-robo ">
       {/* navbar section */}
       <nav className="flex justify-between overflow-x-hidden">
-        <div className="relative w-auto h-auto">
+        <div className="relative w-auto h-auto"  onClick={() => router.push("/")}>
           <Image
             src={logo}
             alt="Website Logo"
@@ -54,8 +58,8 @@ function Header() {
           >
             x
           </li>
-          <li>Home</li>
-          <li>Gallery</li>
+          <li onClick={() => router.push("/")} >Home</li>
+          <li onClick={() => router.push("/blogs")} >Gallery</li>
           <li>Bookmarks</li>
           <li>profile</li>
           <li>Login/singup</li>

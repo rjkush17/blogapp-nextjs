@@ -1,18 +1,24 @@
 import Image from "next/image";
 import BlogCard from "@/app/_components/BlogCard";
+import { useRouter } from 'next/navigation'
+
 
 function category({ blog, Health }) {
+
+  const router = useRouter()
+
+
   return (
     <section>
       <h1 className="mt-12">{blog[0].category}</h1>
       <div className="flex mt-4 h-auto tablet:h-[600px] overflow-hidden flex-col-reverse tablet:flex-row">
         <div className="h-full flex flex-col justify-around basis-[50%] desktop:basis-[40%] bg-black text-white py-12 tablet:py-16 px-12 tablet:px-24 aspect-video tablet:aspect-auto">
-          <h1 className="font-EB tracking-wide">{blog[3].title}</h1>
+          <h1 className="font-EB tracking-wide ">{blog[3].title}</h1>
           <h3 className="text-xl tablet:text-2xl font-medium mt-6">
             Let’s Discover more about your next destination
           </h3>
           <div className="text-center">
-            <button className="mt-8 text-white bg-orange-600">
+            <button className="mt-8 button text-white bg-orange-600"  onClick={() => router.push(`/blogs/${blog[0]._id}`)}>
               Read full story
             </button>
           </div>
