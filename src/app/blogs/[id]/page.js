@@ -3,10 +3,14 @@ import useGET from "@/hooks/useGET";
 import { useEffect } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
+import { useRouter } from 'next/navigation'
+
 
 function page() {
   const { isError, isLoading, data, fetchGET } = useGET();
   const params = useParams();
+  const router = useRouter()
+
 
   useEffect(() => {
     console.log("Fetching with ID:", params.id);
@@ -83,11 +87,11 @@ function page() {
         <div className="w-full flex flex-col mobile:flex-row justify-between mb-12 gap-8">
           <div className=" max-w-96 text-start">
             <p className="font-noto">PREVIOUS</p>
-            <h4 className="font-EB my-1 mobile:my-4 underline">{filterdata[0].title}</h4>
+            <h4 className="font-EB my-1 mobile:my-4 underline"  onClick={() => router.push(`/blogs/${filterdata[0]._id}`)}>{filterdata[0].title}</h4>
           </div>
           <div className="max-w-96 text-start mobile:text-end">
             <p className="font-noto">NEXT</p>
-            <h4 className="font-EB my-1 mobile:my-4 underline">{filterdata[1].title}</h4>
+            <h4 className="font-EB my-1 mobile:my-4 underline" onClick={() => router.push(`/blogs/${filterdata[1]._id}`)}>{filterdata[1].title}</h4>
           </div>
         </div>
       )}
