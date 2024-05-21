@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from 'next/navigation'
-
+import Fav from "./fav"
 
 function BlogCard({ data }) {
 
@@ -28,10 +28,13 @@ function BlogCard({ data }) {
           {data.date.year}
         </p>
         <h3>{data.title}</h3>
+        <div className="flex justify-between">
         <button  onClick={() => router.push(`/blogs/${data._id}`)}
           className="my-4 rounded-full text-black bg-white hover:text-white hover:bg-black font-noto py-3 px-6 text-lg font-normal border-black border w-fit uppercase transition-all">
           Read more
         </button>
+        <Fav/>
+        </div>
       </div>
     </section>
   );

@@ -4,13 +4,22 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { useState,useEffect } from "react";
 import logo from "/public/header/mainlogo.png";
 import { useRouter } from 'next/navigation'
+import { useSelector } from "react-redux";
 
 
 function Header() {
   // navbar panel function
-  const [isPanelOpen, setIsPanelOpen] = useState(false);
-  const router = useRouter()
 
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const router = useRouter()
+  const userAuth = useSelector((state)=>state.auth.user)
+  console.log(userAuth)
 
   useEffect(()=>{
     if(isPanelOpen && window.innerWidth <= 900){
@@ -58,15 +67,15 @@ function Header() {
           >
             x
           </li>
-          <li onClick={() => router.push("/")} >Home</li>
-          <li onClick={() => router.push("/blogs")} >Gallery</li>
+          <li onClick={() => router.push("/") && setIsPanelOpen(!isPanelOpen)} >Home</li>
+          <li onClick={() => router.push("/blogs") && setIsPanelOpen(!isPanelOpen) } >Gallery</li>
           <li>Bookmarks</li>
           <li>profile</li>
-          <li>Login/singup</li>
+    
+          {mounted ? (userAuth ? <li>profile</li>: <li>Login</li>) : ""}
         </ul>
       </nav>
-    </header>
+      </header>
   );
 }
-
 export default Header;

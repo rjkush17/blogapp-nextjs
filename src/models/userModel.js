@@ -24,15 +24,9 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true,
     minlength: 4,
-    maxlength: 18,
-  },
-  gender: {
-    type: String,
-    enum: ["male", "female"],
-    trim: true,
-    require : true
-  },
+    maxlength: 45,
+  }
 });
 
-const User = mongoose.model.user || mongoose.model("User", userSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 export default User;

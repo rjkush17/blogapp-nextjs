@@ -48,12 +48,12 @@ h4{
 }
 
 .button {
-    @apply mt-8 rounded  font-noto py-4 px-10 text-xl w-fit font-semibold uppercase
+    @apply mt-8 rounded font-noto py-4 px-10 text-xl w-fit font-semibold uppercase
 }
 
 /* Navbar CSS */
 .full_ul {
-    @apply tablet:flex bg-white justify-between gap-4 text-lg tracking-wider font-semibold uppercase transition-all duration-1000
+    @apply tablet:flex bg-white justify-between  text-lg tracking-wider font-medium gap-8 mobile:gap-5 uppercase transition-all duration-1000
 }
 
 @media (max-width: 900px) {
