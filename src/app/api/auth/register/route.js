@@ -35,9 +35,13 @@ export const POST = async (req) => {
     if (!newUser) {
       return NextResponse.json({ error: "User not created" }, { status: 400 });
     }
+    
+    
+    const userObject = newUser.toObject();
+    delete userObject.password;
 
     const jwtKey = process.env.JWTKEY;
-    const token = jwt.sign({ id: newUser._id }, jwtKey, { expiresIn: "3h" });
+    const token = jwt.sign({ user: userObject }, jwtKey, { expiresIn: "3h" });
 
     return NextResponse.json({
       message: "User registration is successful",

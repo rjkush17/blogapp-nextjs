@@ -25,6 +25,7 @@ const connectionDB = async() =>{
     cached.promise = mongoose.connect(url,opts).then((res)=>mongoose)
 
     cached.conn = await cached.promise
+    console.log("databse connected")
     return cached.conn;
 }
 

@@ -19,8 +19,11 @@ export const POST = async (req) => {
       return NextResponse.json({ error: "Incorrect password" }, { status: 400 });
     }
 
+    const userObject = user.toObject();
+    delete userObject.password;
+
     const jwtKey = process.env.JWTKEY;
-    const token = jwt.sign({ id: user._id }, jwtKey, { expiresIn: "4h" });
+    const token = jwt.sign( {user: userObject }, jwtKey, { expiresIn: "4h" });
 
     return NextResponse.json({
       message: "User login successful",
