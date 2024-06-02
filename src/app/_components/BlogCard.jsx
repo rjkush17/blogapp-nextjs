@@ -6,6 +6,7 @@ function BlogCard({ data }) {
 
   const router = useRouter()
 
+
   return (
     <section className="max-w-[500px] mx-auto">
       <div className="aspect-[6/4] overflow-hidden group relative cursor-pointer">
@@ -33,7 +34,7 @@ function BlogCard({ data }) {
           className="my-4 rounded-full text-black bg-white hover:text-white hover:bg-black font-noto py-3 px-6 text-lg font-normal border-black border w-fit uppercase transition-all">
           Read more
         </button>
-        <Fav/>
+        <Fav id={data._id}/>
         </div>
       </div>
     </section>

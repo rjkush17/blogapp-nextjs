@@ -2,12 +2,24 @@
 import useGET from "@/hooks/useGET";
 import { useEffect } from "react";
 import Pagination from "../_components/Pagination";
+import { useDispatch } from 'react-redux';
+import { fetchFav } from '@/lib/redux/slice/favSlice';
+import { useSelector } from "react-redux";
 
 function page() {
+
+  const dispatch = useDispatch();
   const { isError, isLoading, data, fetchGET } = useGET();
   useEffect(() => {
     fetchGET("blogs");
   }, []);
+
+  const auth = useSelector((state) => state.auth.user);
+  if(auth){
+    useEffect(() => {
+      dispatch(fetchFav());
+    }, [dispatch]);
+  }
 
 
   return (

@@ -4,6 +4,7 @@ import Header from "./_components/Header";
 import "./globals.css";
 import { StoreProvider } from "@/lib/redux/StoreProvider";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -12,6 +13,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
+  
   return (
     <StoreProvider>
       <html lang="en">

@@ -6,23 +6,30 @@ function usePOST() {
   const [data, setData] = useState(null);
   const [controller, setController] = useState(null);
 
-  const fetchPOST = async (route, bodyData) => {
-    //if controller is set then it cancel the previouse API request
+  const fetchPOST = async (route, bodyData, token = null) => {
+    // If controller is set, then it cancels the previous API request
     if (controller) {
       controller.abort();
     }
-    //set new controller of controller
+    // Set new controller
     const newController = new AbortController();
     setController(newController);
 
     setIsLoading(true);
     setIsError(null);
+
     try {
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+      }
+
       const res = await fetch(`/api/${route}`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: headers,
         body: JSON.stringify(bodyData),
         signal: newController.signal,
       });
@@ -32,26 +39,27 @@ function usePOST() {
       if (!res.ok) {
         setIsLoading(null);
         setIsError(resData);
-        return
+        return;
       }
+      
       setIsLoading(null);
       setIsError(null);
       setData(resData);
-      return;
     } catch (error) {
-      if (error.name == "AbortError") {
+      if (error.name === "AbortError") {
         console.error("Fetching failed", error);
         setIsError({ error: "Failed to fetch API abort" });
         setIsLoading(null);
         return false;
       } else {
-        console.log("fecthing failed");
+        console.error("Fetching failed", error);
         setIsError({ error: "Internal Server error" });
         setIsLoading(null);
         return false;
       }
     }
   };
+
   // Clean up the abort controller when the component unmounts
   useEffect(() => {
     return () => {
@@ -60,6 +68,8 @@ function usePOST() {
       }
     };
   }, [controller]);
+
   return { isError, isLoading, data, fetchPOST };
 }
+
 export default usePOST;

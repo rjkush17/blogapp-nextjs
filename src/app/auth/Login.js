@@ -27,14 +27,12 @@ function Login({ toggleScreen }) {
   const handleSubmit =async (e) => {
     e.preventDefault();
     await fetchPOST("auth/login",formValue)
-    console.log(formValue);
   };
 
 
   useEffect(() => {
     if (data) {
       dispatch(login(data.token));
-      console.log(data); // This will log the data when it's updated
     }
   }, [data]);
 

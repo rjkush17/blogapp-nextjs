@@ -1,8 +1,11 @@
-"use client"
 import { createSlice } from "@reduxjs/toolkit";
+import useDecodeJWT from "@/hooks/useDecodeJWT";
 
 const initialState = {
-    user: typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("auth")) || null : null
+  user:
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("auth")) || null
+      : null,
 };
 
 export const authSlice = createSlice({
@@ -10,12 +13,15 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      state.user = action.payload;
-      localStorage.setItem("auth", JSON.stringify({userToken : state.user}));
+      const userDetails = useDecodeJWT(action.payload);
+      state.user = { token: action.payload, details: userDetails };
+      localStorage.setItem("auth", JSON.stringify(state.user));
+      console.log("current user :-", state);
     },
     logout: (state) => {
       state.user = null;
       localStorage.removeItem("auth");
+      console.log("current user :-", state);
     },
   },
 });

@@ -4,7 +4,9 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { useState,useEffect } from "react";
 import logo from "/public/header/mainlogo.png";
 import { useRouter } from 'next/navigation'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {logout} from "@/lib/redux/slice/authSlice"
+
 
 
 function Header() {
@@ -12,6 +14,7 @@ function Header() {
 
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setMounted(true);
@@ -19,7 +22,6 @@ function Header() {
 
   const router = useRouter()
   const userAuth = useSelector((state)=>state.auth.user)
-  console.log(userAuth)
 
   useEffect(()=>{
     if(isPanelOpen && window.innerWidth <= 900){
@@ -67,12 +69,12 @@ function Header() {
           >
             x
           </li>
-          <li onClick={() => router.push("/") && setIsPanelOpen(!isPanelOpen)} >Home</li>
-          <li onClick={() => router.push("/blogs") && setIsPanelOpen(!isPanelOpen) } >Gallery</li>
-          <li>Bookmarks</li>
-          <li>profile</li>
+          <li onClick={() => router.push("/") && setIsPanelOpen(!isPanelOpen)} className="cursor-pointer" >Home</li>
+          <li onClick={() => router.push("/blogs") && setIsPanelOpen(!isPanelOpen) }   className="cursor-pointer">Gallery</li>
+          <li  className="cursor-pointer">Bookmarks</li>
+          <li  className="cursor-pointer" >profile</li>
     
-          {mounted ? (userAuth ? <li>profile</li>: <li>Login</li>) : ""}
+          {mounted ? (userAuth ? <li className="cursor-pointer" onClick={()=>dispatch(logout())}>Logout</li>: <li className="cursor-pointer" onClick={() => router.push("/auth") && setIsPanelOpen(!isPanelOpen) } >Login</li>) : ""}
         </ul>
       </nav>
       </header>

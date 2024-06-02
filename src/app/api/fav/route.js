@@ -37,12 +37,11 @@ export async function POST(req) {
     } else {
       fav.blogs.push(blogID);
       await fav.save();
-      return NextResponse.json({ message: "Blog added to favorites" }, { status: 201 });
-    }
+
+      return NextResponse.json({ message: "Blog added to favorites"}, { status: 200 })}
 
   } catch (error) {
     console.error("Error managing favorite blogs:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
-  }
-}
+  }}
 

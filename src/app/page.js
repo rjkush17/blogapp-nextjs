@@ -4,15 +4,27 @@ import Fivblog from "@/app/_components/home/fiveBlog"
 import Popularblogs from "@/app/_components/home/popularblog"
 import CategoryBlog from "@/app/_components/home/category"
 import Health from "/public/home/health.jpg";
-
+import { fetchFav } from '@/lib/redux/slice/favSlice'; 
+import { useDispatch } from 'react-redux';
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function Home() {
+  const dispatch = useDispatch();
+
   const { isError, isLoading, data, fetchGET } = useGET();
+
 
   useEffect(() => {
     fetchGET("home");
   }, []);
+
+  const auth = useSelector((state) => state.auth.user);
+  if(auth){
+    useEffect(() => {
+      dispatch(fetchFav());
+    }, [dispatch]);
+  }
 
   return (
     <main className="w-11/12 mx-auto">
