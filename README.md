@@ -10,3 +10,4 @@ auth, fav blogs, is subscribe, move to top button , search bar, active navbar
 ##
 duplicate email registration
 mail ID = uppercase issue
+redirect
