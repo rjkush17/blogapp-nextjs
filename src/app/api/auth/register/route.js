@@ -41,7 +41,7 @@ export const POST = async (req) => {
     delete userObject.password;
 
     const jwtKey = process.env.JWTKEY;
-    const token = jwt.sign({ user: userObject }, jwtKey, { expiresIn: "3h" });
+    const token = jwt.sign({ user: userObject }, jwtKey);
 
     return NextResponse.json({
       message: "User registration is successful",

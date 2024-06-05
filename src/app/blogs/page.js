@@ -10,15 +10,19 @@ function page() {
 
   const dispatch = useDispatch();
   const { isError, isLoading, data, fetchGET } = useGET();
+  const auth = useSelector((state) => state.auth.user);
+
   useEffect(() => {
     fetchGET("blogs");
-  }, []);
 
-  const auth = useSelector((state) => state.auth.user);
-  if(auth){
-    useEffect(() => {
+    if (auth) {
       dispatch(fetchFav());
-    }, [dispatch]);
+    }
+  }, [auth]);
+
+  if(data){
+    console.log(data.blogs)
+
   }
 
 

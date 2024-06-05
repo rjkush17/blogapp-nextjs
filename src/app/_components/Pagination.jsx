@@ -23,6 +23,15 @@ function Pagination({ data, items }) {
     }
   };
 
+  if (totalPages <= 1) {
+    return (
+      <div className="w-11/12 mx-auto mt-12 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-8 h-full">
+        {currentItems.map((val, ind) => (
+          <BlogCard data={val} key={ind} />
+        ))}
+      </div>
+    )  }
+
   return (
     <>
       <div className="w-11/12 mx-auto mt-12 grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-8 h-full">
@@ -31,16 +40,20 @@ function Pagination({ data, items }) {
         ))}
       </div>
       <section className="flex w-fit mx-auto text-3xl gap-10 my-16">
-        <button
-          onClick={() => handlePage(currentPage - 1)}
-          disabled={currentPage === 1}
-          className={`${currentPage === 1 ? "text-gray-400" : ""}`}
-        >
-         <IoMdArrowBack />
 
-        </button>
+        { 
+         <button
+         onClick={() => handlePage(currentPage - 1)}
+         disabled={currentPage === 1}
+         className={`${currentPage === 1 ? "text-gray-400" : ""}`}
+       >
+        <IoMdArrowBack />
 
-        {Array.from({ length: totalPages }, (_, index) => (
+       </button>
+        }
+       
+
+        { Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
             onClick={() => handlePage(index + 1)}
@@ -49,13 +62,17 @@ function Pagination({ data, items }) {
             {index + 1}
           </button>
         ))}
-        <button
-          onClick={() => handlePage(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className={`${currentPage === 3 ? "text-gray-400" : ""}`}
-        >
-          <IoMdArrowForward />
-        </button>
+                { 
+                 <button
+                 onClick={() => handlePage(currentPage + 1)}
+                 disabled={currentPage === totalPages}
+                 className={`${currentPage === 3 ? "text-gray-400" : ""}`}
+               >
+                 <IoMdArrowForward />
+               </button>
+                }
+
+       
       </section>
     </>
   );
