@@ -50,6 +50,9 @@ h4{
 .button {
     @apply mt-8 rounded font-noto py-4 px-10 text-xl w-fit font-semibold uppercase
 }
+.button_sm {
+    @apply mt-4 rounded font-noto py-4 px-4 text-sm w-fit font-semibold uppercase
+}
 
 /* Navbar CSS */
 .full_ul {

@@ -72,7 +72,7 @@ function Header() {
           <li onClick={() => router.push("/") && setIsPanelOpen(!isPanelOpen)} className="cursor-pointer" >Home</li>
           <li onClick={() => router.push("/blogs") && setIsPanelOpen(!isPanelOpen) }   className="cursor-pointer">Gallery</li>
           <li onClick={() => router.push("/favorite") && setIsPanelOpen(!isPanelOpen) } className="cursor-pointer">Bookmarks</li>
-          <li  className="cursor-pointer" >profile</li>
+          <li onClick={() => router.push("/profile") && setIsPanelOpen(!isPanelOpen) } className="cursor-pointer" >profile</li>
     
           {mounted ? (userAuth ? <li className="cursor-pointer" onClick={()=>dispatch(logout())}>Logout</li>: <li className="cursor-pointer" onClick={() => router.push("/auth") && setIsPanelOpen(!isPanelOpen) } >Login</li>) : ""}
         </ul>

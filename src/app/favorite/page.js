@@ -5,7 +5,6 @@ import Auth from './Auth';
 import NonAuth from './NonAuth';
 import { fetchFav } from '@/lib/redux/slice/favSlice';
 
-
 function Page() {
   const [isMounted, setIsMounted] = useState(false);
   const auth = useSelector((state) => state.auth.user);

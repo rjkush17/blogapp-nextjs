@@ -1,14 +1,26 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Login from "./Login";
 import Register from "./Register";
-
+import { useRouter } from "next/navigation";
+import { useSelector } from 'react-redux';
 
 function AuthPage() {
-  
-
+  const auth = useSelector((state) => state.auth.user);
+  const router = useRouter();
   const [isLoginScreen, setIsLoginScreen] = useState(true);
+
+  useEffect(() => {
+    if (auth) {
+      router.push("/");
+    }
+  }, [auth, router]);
+
   const toggleScreen = () => setIsLoginScreen(!isLoginScreen);
+
+  if (auth) {
+    return null; // or a loading spinner or some placeholder component
+  }
 
   return (
     <main>
@@ -22,4 +34,3 @@ function AuthPage() {
 }
 
 export default AuthPage;
-
