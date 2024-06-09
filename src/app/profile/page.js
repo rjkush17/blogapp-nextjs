@@ -8,7 +8,7 @@ import { logout } from "@/lib/redux/slice/authSlice";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function page() {
+function Page() {
   const [isMounted, setIsMounted] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -113,4 +113,4 @@ function page() {
   }
 }
 
-export default page;
+export default Page;

@@ -1,8 +1,8 @@
 "use client";
 import useGET from "@/hooks/useGET";
-import Fivblog from "@/app/_components/home/fiveBlog";
-import Popularblogs from "@/app/_components/home/popularblog";
-import CategoryBlog from "@/app/_components/home/category";
+import Fivblog from "@/app/_components/home/FiveBlog";
+import Popularblogs from "@/app/_components/home/Popularblog";
+import CategoryBlog from "@/app/_components/home/Category";
 import Health from "/public/home/health.jpg";
 import { fetchFav } from "@/lib/redux/slice/favSlice";
 import { useDispatch } from "react-redux";

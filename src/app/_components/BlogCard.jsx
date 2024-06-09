@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from 'next/navigation'
-import Fav from "./fav"
+import Fav from "./Fav"
 
 function BlogCard({ data }) {
 

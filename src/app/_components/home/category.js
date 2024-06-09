@@ -3,7 +3,7 @@ import BlogCard from "@/app/_components/BlogCard";
 import { useRouter } from 'next/navigation'
 
 
-function category({ blog, Health }) {
+function Category({ blog, Health }) {
 
   const router = useRouter()
 
@@ -47,4 +47,4 @@ function category({ blog, Health }) {
   );
 }
 
-export default category;
+export default Category;

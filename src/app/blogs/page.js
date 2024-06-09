@@ -7,7 +7,7 @@ import { fetchFav } from "@/lib/redux/slice/favSlice";
 import { useSelector } from "react-redux";
 import Loader from "@/app/_components/Loader";
 
-export default function page() {
+export default function Page() {
   const dispatch = useDispatch();
   const { isError, isLoading, data, fetchGET } = useGET();
   const auth = useSelector((state) => state.auth.user);

@@ -8,7 +8,7 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "@/app/_components/Loader";
-import Fav from "@/app/_components/fav";
+import Fav from "@/app/_components/Fav";
 import { fetchFav } from "@/lib/redux/slice/favSlice";
 
 function page() {

@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toggleFav } from '@/lib/redux/slice/favSlice';
 
 
-function fav({ id }) {
+function Fav({ id }) {
   const data = useSelector((state) => state.fav.fav);
   const auth = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
@@ -70,4 +70,4 @@ if(auth){
  
 }
 
-export default fav;
+export default Fav;

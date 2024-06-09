@@ -6,7 +6,7 @@ import Loader from "@/app/_components/Loader";
 import { useRouter } from "next/navigation";
 
 
-function auth({ id, token }) {
+function Auth({ id, token }) {
   const { isError, isLoading, data, fetchGET } = useGET();
   const router = useRouter();
 
@@ -58,4 +58,4 @@ function auth({ id, token }) {
   }
 }
 
-export default auth;
+export default Auth;

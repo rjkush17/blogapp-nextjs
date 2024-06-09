@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from 'next/navigation'
 
 
-function fiveBlog({blog}) {
+function FiveBlog({blog}) {
   const router = useRouter()
 
   return (
@@ -29,4 +29,4 @@ function fiveBlog({blog}) {
   )
 }
 
-export default fiveBlog
+export default FiveBlog
