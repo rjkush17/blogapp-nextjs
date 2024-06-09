@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 
-const useDecodeJWT = (token) => {
+export const useDecodeJWT = (token) => {
 
   if (!token) {
     console.log("No token available");
@@ -10,5 +10,3 @@ const useDecodeJWT = (token) => {
     return decoded;
   }
 };
-
-export default useDecodeJWT;
