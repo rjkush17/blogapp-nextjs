@@ -8,8 +8,8 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "@/app/_components/Loader";
-import Fav from "@/app/_components/Fav";
 import { fetchFav } from "@/lib/redux/slice/favSlice";
+import Fav from "@/app/_components/Fav"
 
 function page() {
   const { isError, isLoading, data, fetchGET } = useGET();
