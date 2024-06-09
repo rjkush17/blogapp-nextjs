@@ -6,7 +6,8 @@ import { FaLock } from "react-icons/fa";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import {login} from "@/lib/redux/slice/authSlice"
-
+import 'react-toastify/dist/ReactToastify.css'; 
+import { ToastContainer, toast, Bounce } from "react-toastify";
 import LoginIMG from "/public/auth/login.jpg";
 
 function Register({ toggleScreen }){
@@ -31,17 +32,42 @@ function Register({ toggleScreen }){
   const handleSubmit =async (e) => {
     e.preventDefault();
     await fetchPOST("auth/register",formValue)
-    console.log(formValue);
   };
 
   useEffect(() => {
     if (data) {
       dispatch(login(data.token));
     }
-  }, [data]);
+    if (isError) {
+      toast.error(isError.error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+  }, [data,isError,dispatch]);
 
   return (
     <main className="bg-gray-100 py-0 tablet:py-24 w-screen overflow-hidden">
+           <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
       <section className="max-w-full tablet:max-w-[900px] mx-auto  flex bg-white py-24">
         <div className="basis-2/4	ml-auto hidden tablet:block">
           <Image

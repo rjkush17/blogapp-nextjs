@@ -1,57 +1,15 @@
 "use client";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchFav } from "@/lib/redux/slice/favSlice";
-import useGET from "@/hooks/useGET";
-import Pagination from "../_components/Pagination";
+import { useRouter } from "next/navigation";
+
 
 function Page() {
-  const auth = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
-  const { isError, isLoading, data, fetchGET } = useGET();
-
-  useEffect(() => {
-    if (auth) {
-      const fetchData = async () => {
-        const ID = auth.details.user._id;
-        const token = auth.token;
-        await fetchGET(`favorites/${ID}`, token);
-        dispatch(fetchFav());
-      };
-
-      fetchData();
-    }
-  }, [auth]);
-
-  if (!auth) {
-    return <p>Login to view this page</p>;
-  }
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (isError) {
-    return <p>{isError.error}</p>;
-  }
-
-  if (auth && !data) {
-    return <p>Zero favorites found</p>;
-  }
+  const router = useRouter();
 
     return (
-      <main className="">
-        <section>
-          <div className="bg-zinc-100 text-center py-8 mobile:py-24 my-10 w-full ">
-            <p className="text-4xl mobile:text-7xl mb-2 mobile:mb-6 font-noto">
-              BLOGS
-            </p>
-            <p className="text-xl uppercase ">
-              Home &gt; Blogs &gt; Favorites
-            </p>
-          </div>{console.log(data.blogs)}
-          <Pagination data={data.blogs} itemsPerPage={6} />
-        </section>
+      <main className="w-9/12 mx-auto text-center my-8">
+        <h2 className="text-noto">Oops! You need to be logged in to access this page.</h2>
+        <p className="mt-8">Please log in to your account to continue. If you don't have an account, you can sign up in just a few minutes.</p>
+        <button className="button bg-orange-400 text-white mb-32" onClick={()=>router.push("/auth")}>SignIn/SignUp</button>
       </main>
     );
   }

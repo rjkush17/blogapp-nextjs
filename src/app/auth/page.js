@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Login from "./Login";
 import Register from "./Register";
 import { useRouter } from "next/navigation";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 function AuthPage() {
   const auth = useSelector((state) => state.auth.user);
@@ -14,23 +14,24 @@ function AuthPage() {
     if (auth) {
       router.push("/");
     }
-  }, [auth, router]);
+  }, [auth]);
 
   const toggleScreen = () => setIsLoginScreen(!isLoginScreen);
 
   if (auth) {
-    return null; // or a loading spinner or some placeholder component
+    return <p>you can't access this page when login</p>;
   }
-
-  return (
-    <main>
-      {isLoginScreen ? (
-        <Login toggleScreen={toggleScreen} />
-      ) : (
-        <Register toggleScreen={toggleScreen} />
-      )}
-    </main>
-  );
+  if (!auth) {
+    return (
+      <main>
+        {isLoginScreen ? (
+          <Login toggleScreen={toggleScreen} />
+        ) : (
+          <Register toggleScreen={toggleScreen} />
+        )}
+      </main>
+    );
+  }
 }
 
 export default AuthPage;

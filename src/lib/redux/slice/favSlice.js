@@ -8,7 +8,6 @@ export const fetchFav = createAsyncThunk("fetchFav", async () => {
       return;
     }
     const id = tok.details.user._id;
-    console.log(id)
 
     const res = await fetch(`/api/fav/${id}`, {
       method: "GET",

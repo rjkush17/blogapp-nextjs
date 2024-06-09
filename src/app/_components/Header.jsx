@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
 import { FaBarsStaggered } from "react-icons/fa6";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import logo from "/public/header/mainlogo.png";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import {logout} from "@/lib/redux/slice/authSlice"
-
+import { logout } from "@/lib/redux/slice/authSlice";
+import { usePathname } from 'next/navigation'
 
 
 function Header() {
@@ -15,30 +15,40 @@ function Header() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const dispatch = useDispatch();
+  const pathname = usePathname();
+ 
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const router = useRouter()
-  const userAuth = useSelector((state)=>state.auth.user)
+  const router = useRouter();
+  const userAuth = useSelector((state) => state.auth.user);
 
-  useEffect(()=>{
-    if(isPanelOpen && window.innerWidth <= 900){
-      document.body.classList.add("overflow-y-hidden")
+  useEffect(() => {
+    if (isPanelOpen && window.innerWidth <= 900) {
+      document.body.classList.add("overflow-y-hidden");
     }
 
-    return ()=>{
-      document.body.classList.remove("overflow-y-hidden")
-    }
-  },[isPanelOpen])
+    return () => {
+      document.body.classList.remove("overflow-y-hidden");
+    };
+  }, [isPanelOpen]);
 
+
+  const handlenav = (page) => {
+    router.push(page);
+    setIsPanelOpen(!isPanelOpen);
+  };
 
   return (
     <header className=" w-screen overflow-hidden py-6 tablet:py-10 px-4 tablet:px-20 font-robo ">
       {/* navbar section */}
       <nav className="flex justify-between overflow-x-hidden">
-        <div className="relative w-auto h-auto"  onClick={() => router.push("/")}>
+        <div
+          className="relative w-auto h-auto"
+          onClick={() => router.push("/")}
+        >
           <Image
             src={logo}
             alt="Website Logo"
@@ -47,7 +57,6 @@ function Header() {
             priority={true}
             className="w-44 h-auto"
           />
-        
         </div>
         <div
           className=" tablet:hidden text-2xl "
@@ -57,10 +66,8 @@ function Header() {
         </div>
 
         <ul
-          className={`full_ul z-[999999] ${ 
-            isPanelOpen
-              ? " right-0 flex"
-              : "right-[-100%] hidden"
+          className={`full_ul z-[99] ${
+            isPanelOpen ? " right-0 flex" : "right-[-100%] hidden"
           }`}
         >
           <li
@@ -69,15 +76,35 @@ function Header() {
           >
             x
           </li>
-          <li onClick={() => router.push("/") && setIsPanelOpen(!isPanelOpen)} className="cursor-pointer" >Home</li>
-          <li onClick={() => router.push("/blogs") && setIsPanelOpen(!isPanelOpen) }   className="cursor-pointer">Gallery</li>
-          <li onClick={() => router.push("/favorite") && setIsPanelOpen(!isPanelOpen) } className="cursor-pointer">Bookmarks</li>
-          <li onClick={() => router.push("/profile") && setIsPanelOpen(!isPanelOpen) } className="cursor-pointer" >profile</li>
-    
-          {mounted ? (userAuth ? <li className="cursor-pointer" onClick={()=>dispatch(logout())}>Logout</li>: <li className="cursor-pointer" onClick={() => router.push("/auth") && setIsPanelOpen(!isPanelOpen) } >Login</li>) : ""}
+          <li onClick={() => handlenav("/")} className={`${pathname == "/" ? "font-bold underline" : "" } cursor-pointer`}>
+            Home
+          </li>
+          <li onClick={() => handlenav("/blogs")} className={`${pathname == "/blogs" ? "font-bold underline" : "" } cursor-pointer`}>
+            Gallery
+          </li>
+          <li onClick={() => handlenav("/favorite")} className={`${pathname == "/favorite" ? "font-bold underline" : "" } cursor-pointer`}>
+            Favorites
+          </li>
+          <li onClick={() => handlenav("/profile")} className={`${pathname == "/profile" ? "font-bold underline" : "" } cursor-pointer`}>
+            profile
+          </li>
+
+          {mounted ? (
+            userAuth ? (
+              <li className="cursor-pointer" onClick={() => dispatch(logout())}>
+                Logout
+              </li>
+            ) : (
+              <li className={`${pathname == "/auth" ? "font-bold underline" : "" } cursor-pointer`} onClick={() => handlenav("/auth")}>
+                Login
+              </li>
+            )
+          ) : (
+            ""
+          )}
         </ul>
       </nav>
-      </header>
+    </header>
   );
 }
 export default Header;

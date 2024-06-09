@@ -3,35 +3,81 @@ import useGET from "@/hooks/useGET";
 import { useEffect } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
-import { useRouter } from 'next/navigation'
-
+import { useRouter } from "next/navigation";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSelector, useDispatch } from "react-redux";
+import Loader from "@/app/_components/Loader";
+import Fav from "@/app/_components/fav";
+import { fetchFav } from "@/lib/redux/slice/favSlice";
 
 function page() {
   const { isError, isLoading, data, fetchGET } = useGET();
+  const auth = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
   const params = useParams();
-  const router = useRouter()
-
+  const router = useRouter();
 
   useEffect(() => {
-    console.log("Fetching with ID:", params.id);
     fetchGET(`blogs/${params.id}`);
-  }, []);
+
+    if (auth) {
+      dispatch(fetchFav());
+    }
+  }, [auth]);
 
   let filterdata;
   if (data) {
     filterdata = data.suggestion.filter((val) => val._id !== data.blogs[0]._id);
-    console.log(filterdata);
   }
 
-  const handleSubmit = (e) =>{
-    e.preventDefault()
-    alert("review Submitted")
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!auth) {
+      toast.error("Login first for Review", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    } else {
+      toast.info("Review Submitted", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+  };
 
   return (
     <main className="w-11/12 mobile:w-10/12 mx-auto">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
+
       {isError && <p>{isError.error}</p>}
-      {isLoading && <p>loading...</p>}
+      {isLoading && <Loader />}
 
       {/* Main Blog body */}
 
@@ -42,19 +88,25 @@ function page() {
             {data.blogs[0].category} from {data.blogs[0].date.day}{" "}
             {data.blogs[0].date.month} {data.blogs[0].date.year}
           </p>
+          
+
           <h1 className="my-12 text-xl mobile:text-4xl font-noto upppercase">
             {data.blogs[0].title}
           </h1>
           <h2 className="mt-12 text-lg mobile:text-xl">
             {data.blogs[0].description}
           </h2>
+          <div className="w-fit ml-auto mt-4">
+            {" "}
+            <Fav className="ml-auto" id={data.blogs[0]._id} />
+          </div>
           <Image
             src={data.blogs[0].img}
             width={900}
             height={900}
             priority={true}
             alt="Blog Image"
-            className="w-fit mx-auto my-8"
+            className="w-fit mx-auto mb-8 mt-4"
           />
           <div>
             {data.blogs[0].content.map((val, ind) => (
@@ -87,11 +139,21 @@ function page() {
         <div className="w-full flex flex-col mobile:flex-row justify-between mb-12 gap-8">
           <div className=" max-w-96 text-start">
             <p className="font-noto">PREVIOUS</p>
-            <h4 className="font-EB my-1 mobile:my-4 underline"  onClick={() => router.push(`/blogs/${filterdata[0]._id}`)}>{filterdata[0].title}</h4>
+            <h4
+              className="font-EB my-1 mobile:my-4 underline"
+              onClick={() => router.push(`/blogs/${filterdata[0]._id}`)}
+            >
+              {filterdata[0].title}
+            </h4>
           </div>
           <div className="max-w-96 text-start mobile:text-end">
             <p className="font-noto">NEXT</p>
-            <h4 className="font-EB my-1 mobile:my-4 underline" onClick={() => router.push(`/blogs/${filterdata[1]._id}`)}>{filterdata[1].title}</h4>
+            <h4
+              className="font-EB my-1 mobile:my-4 underline"
+              onClick={() => router.push(`/blogs/${filterdata[1]._id}`)}
+            >
+              {filterdata[1].title}
+            </h4>
           </div>
         </div>
       )}
@@ -140,7 +202,7 @@ function page() {
                 />
                 <input
                   type="text"
-                  placeholder="Enter Your Email"
+                  placeholder="Enter title"
                   required
                   className="w-full shadow-lg	rounded py-1 px-4"
                 />
@@ -157,7 +219,10 @@ function page() {
                   time I comment.
                 </label>
               </div>
-              <button type="submit" className="w-full py-2 px-6 my-4 rounded bg-slate-900 text-white">
+              <button
+                type="submit"
+                className="w-full py-2 px-6 my-4 rounded bg-slate-900 text-white"
+              >
                 {" "}
                 Submit
               </button>

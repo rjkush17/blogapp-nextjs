@@ -1,16 +1,34 @@
 "use client";
-import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import profile from "/public/profile/profile.jpg"
+import profile from "/public/profile/profile.jpg";
+import { useRouter } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "@/lib/redux/slice/authSlice";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function page() {
   const [isMounted, setIsMounted] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const notify = () =>
+    toast.warn("This feature coming soon", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
 
   const auth = useSelector((state) => state.auth.user);
   let user;
   if (auth) {
-    console.log(auth.details.user);
     user = auth.details.user;
   }
 
@@ -22,11 +40,30 @@ function page() {
     return null;
   }
   if (!auth) {
-    <p className="mx-4"> user not login yet</p>;
+    return (
+      <main className="w-9/12 mx-auto text-center my-8">
+        <h2 className="text-noto">Oops! You need to be logged in to access this page.</h2>
+        <p className="mt-8">Please log in to your account to continue. If you don't have an account, you can sign up in just a few minutes.</p>
+        <button className="button bg-orange-400 text-white mb-32" onClick={()=>router.push("/auth")}>SignIn/SignUp</button>
+      </main>
+    );
   }
   if (auth) {
     return (
       <main className="w-full mobile:w-11/12 tablet:w-8/12 mx-auto">
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Bounce}
+        />
         <h1 className="mx-4 mt-8">My Details</h1>
         <section className="pb-24 shadow-2xl my-0 mobile:my-8 rounded px-2 mobile:px-8 py-4 mobile:py-10 font-EB text-sm mobile:text-xl">
           <div className="w-64 aspect-square mx-auto rounded-full overflow-hidden mb-8">
@@ -56,13 +93,19 @@ function page() {
           </div>
 
           <div className="flex gap-4 justify-evenly flex-wrap">
-            <button className="button_sm bg-blue-300 text-white">
+            <button
+              className="button_sm bg-blue-300 text-white"
+              onClick={() => router.push("/favorite")}
+            >
               Saved Blogs
             </button>
-            <button className="button_sm bg-green-300 text-white">
+            <button
+              className="button_sm bg-green-300 text-white"
+              onClick={notify}
+            >
               Edit Profile
             </button>
-            <button className="button_sm bg-red-500 text-white">logout</button>
+            <button className="button_sm bg-red-500 text-white" onClick={()=>dispatch(logout())}>logout</button>
           </div>
         </section>
       </main>
