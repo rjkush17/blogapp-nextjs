@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useDecodeJWT } from "@/hooks/useDecodeJWT";
+import  useDecodeJWT  from "@/hooks/useDecodeJWT";
 
 const initialState = {
   user:
