@@ -11,7 +11,7 @@ import Loader from "@/app/_components/Loader";
 import { fetchFav } from "@/lib/redux/slice/favSlice";
 import Fav from "@/app/_components/Fav"
 
-function page() {
+function Page() {
   const { isError, isLoading, data, fetchGET } = useGET();
   const auth = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
@@ -114,7 +114,7 @@ function page() {
                 className="indent-10 mobile:indent-20	mb-8 mobile:mb-10 text-start"
                 key={ind}
               >
-                {val} "Sed ut perspiciatis unde omnis iste natus error sit
+                {val} Sed ut perspiciatis unde omnis iste natus error sit
                 voluptatem accusantium doloremque laudantium, totam rem aperiam,
                 eaque ipsa quae ab illo inventore veritatis et quasi architecto
                 beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
@@ -234,4 +234,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

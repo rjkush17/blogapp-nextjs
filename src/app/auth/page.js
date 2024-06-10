@@ -14,12 +14,12 @@ function AuthPage() {
     if (auth) {
       router.push("/");
     }
-  }, [auth]);
+  }, [auth, router]);
 
   const toggleScreen = () => setIsLoginScreen(!isLoginScreen);
 
   if (auth) {
-    return <p>you can't access this page when login</p>;
+    return <p>you can&#39;t access this page when login</p>;
   }
   if (!auth) {
     return (
