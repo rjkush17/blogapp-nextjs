@@ -68,5 +68,5 @@ export async  function middleware(req) {
 }
 
 export const config = {
-  matcher: ["/api/fav/:path*"],
+  matcher: ["/api/fav/:path*", "/api/favorites/:path"],
 };
