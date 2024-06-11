@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import  useDecodeJWT  from "@/hooks/useDecodeJWT";
+import { jwtDecode } from "jwt-decode";
 
 const initialState = {
   user:
@@ -13,8 +13,8 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      const userDetails = useDecodeJWT(action.payload);
-      state.user = { token: action.payload, details: userDetails };
+      const decoded = jwtDecode(action.payload);
+      state.user = { token: action.payload, details: decoded };
       localStorage.setItem("auth", JSON.stringify(state.user));
       console.log("current user :-", state);
     },
