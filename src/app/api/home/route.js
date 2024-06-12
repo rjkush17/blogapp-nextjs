@@ -38,10 +38,25 @@ export async function GET(req) {
       );
     }
 
-    const featured_data = await blogModel.find(
-      { featured: true },
+    const featured_data1 = await blogModel.find(
+      { _id: "662dbc726a2709c6e724bddd" },
       { _id: 1, title: 1, featured_img: 1,img:1, description: 1, category : 1 }
     );
+    const featured_data2 = await blogModel.find(
+      { _id: "662dbc2a6a2709c6e724bdda" },
+      { _id: 1, title: 1, featured_img: 1,img:1, description: 1, category : 1 }
+    );
+    const featured_data3 = await blogModel.find(
+      { _id: "662dbcb86a2709c6e724bde0" },
+      { _id: 1, title: 1, featured_img: 1,img:1, description: 1, category : 1 }
+    );
+    const featured_data4 = await blogModel.find(
+      { _id: "662dbd1f6a2709c6e724bde4" },
+      { _id: 1, title: 1, featured_img: 1,img:1, description: 1, category : 1 }
+    );
+
+    const featured_data = [featured_data1[0],  featured_data4[0], featured_data2[0], featured_data3[0],]
+
     if (!featured_data) {
       return NextResponse.json(
         { error: "featured data not found" },
