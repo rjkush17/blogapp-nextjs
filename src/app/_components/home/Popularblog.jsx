@@ -11,7 +11,7 @@ function Popularblogs({ blog }) {
     <>
       <h1 className="my-10">Popular Stories</h1>
       <section className="flex flex-col tablet:flex-row gap-8 h-auto tablet:h-[575px] overflow-hidden ">
-        <div className="basis-[50%] desktop:basis-[35%] overflow-hidden relative group aspect-square mobile:aspect-video tablet:aspect-auto h-full cursor-pointer"  onClick={() => router.push(`/blogs/${blog[1]._id}`)}>
+        <div  className="basis-[50%] desktop:basis-[35%] overflow-hidden relative group aspect-square mobile:aspect-video tablet:aspect-auto h-full cursor-pointer"  onClick={() => router.push(`/blogs/${blog[1]._id}`)}>
           <Image
             src={blog[0].featured_img}
             width={900}
@@ -21,12 +21,12 @@ function Popularblogs({ blog }) {
             className="h-full w-full object-cover scale-125 group group-hover:scale-100 transition-all duration-500"
           />
           <div className="absolute top-0  bg-transparent w-full h-full text-white px-4 mobile:px-8 py-4 mobile:py-10 flex flex-col justify-between group-hover:bg-[rgba(0,0,0,0.3)] transition-all">
-            <div className="mt-2 tablet:mt-8 w-full border-l-4 border-white pl-4 text-xl opacity-0 group-hover:opacity-100 transition-all">
-              <p>{blog[0].description}</p>
+            <div className="mt-2 tablet:mt-8 w-full border-l-4 border-white pl-4 text-xl opacity-0 group-hover:opacity-100 transition-all" >
+              <p >{blog[0].description}</p>
             </div>
             <div>
               <p className="font-noto uppercase">{blog[0].category}</p>
-              <h2 className="">{blog[0].title}</h2>
+              <h2 className="" >{blog[0].title}</h2>
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@ function Popularblogs({ blog }) {
       </section>
 
       <section className="flex flex-col mt-16 tablet:flex-row gap-8 h-auto tablet:h-[600px] overflow-hidden" >
-        <div className="h-full  basis-[50%] desktop:basis-[55%] aspect-square tablet:aspect-auto" >
+        <div className="h-full group basis-[50%] desktop:basis-[55%] aspect-square tablet:aspect-auto relative" >
         <Image
               src={blog[1].featured_img}
               width={900}
@@ -92,6 +92,11 @@ function Popularblogs({ blog }) {
               alt="Blog Image"
               className="h-full w-full object-cover"
             />
+               <div className="absolute top-0  bg-transparent w-full h-full text-white px-4 mobile:px-8 py-4 mobile:py-10 flex flex-col justify-between group-hover:bg-[rgba(0,0,0,0.6)] transition-all">
+            
+            <p className="border-l-4 border-white opacity-0 pl-4 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-150 delay-150">{blog[1].description}</p>
+       
+          </div>
         </div>
         <div className="h-full basis-[50%] desktop:basis-[45%] bg-pink-100 py-12 tablet:py-28  px-12 tablet:px-24 ">
           <h1 className="font-EB tracking-wide">{blog[1].title}</h1>
